@@ -19,8 +19,12 @@
         <div class="col-md-6">
             <%= form_for([:backoffice, @admin]) do |f| %>
             <div class="form-group">
-                <label>Descrição</label>
-                <%= f.text_field :email, class: 'form-control', placeholder: 'Ex: Animais/Pet' %>
+                <label>Email</label>
+                <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
+            </div>
+            <div class="form-group">
+                <label>Nome</label>
+                <%= f.text_field :name, class: 'form-control', placeholder: 'Nome' %>
             </div>
             <div class="form-group">
                 <label>Senha</label>
