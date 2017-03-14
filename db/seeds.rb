@@ -1,4 +1,4 @@
-puts 'Cadastrando categorias padrão'
+puts 'Cadastrando categorias padrão.................'
 
 categories = [
   'Para a sua casa',
@@ -14,16 +14,20 @@ categories = [
 
 categories.each do |categoria|
   Category.find_or_create_by(description: categoria)
-  puts '..'
+  print '..'
 end
 
+puts '..'
 puts 'Categorias cadastrada com sucesso.'
 
 #################################################################
-puts 'Cadatrando o adminstrador padrão'
+puts 'Cadatrando o adminstrador padrão............'
 
 Admin.create!(email: 'admin@admin.com',
+              name: 'Adminstrador Geral',
               password: '123456',
-              password_confirmation: '123456')
+              password_confirmation: '123456',
+              role: 0)
+puts '..'
 
 puts 'ADMINISTRADOR Cadastrado com sucesso.'
