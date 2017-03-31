@@ -17,7 +17,7 @@ class Backoffice::AdminsController < BackofficeController
     @admin = Admin.new(params_admin)
     if @admin.save
       redirect_to backoffice_admins_path,
-                  notice: "O administrador (#{admin.email})"
+                  notice: "O administrador (#{@admin.email})"
     else
       render :new
     end
@@ -27,8 +27,9 @@ class Backoffice::AdminsController < BackofficeController
 
   def update
     if @admin.update(params_admin)
+      AdminMailer.update_email(current_admin, @admin).deliver_now
       redirect_to backoffice_admins_path,
-                  notice: "O administrador (#{admin.email})"
+                  notice: "O administrador (#{@admin.email})"
     else
       render :new
     end
@@ -38,7 +39,7 @@ class Backoffice::AdminsController < BackofficeController
     admin_email = admin.email
     if @admin.destroy
       redirect_to backoffice_admins_path,
-                  notice: "O administrador (#{admin_email})
+                  notice: "O administrador (#{@admin_email})
                            foi excluído com sucesso"
     else
       render :index
@@ -53,7 +54,7 @@ class Backoffice::AdminsController < BackofficeController
 
   def params_admin
     passwd = params[:admin][:passwd]
-    passwd_confirmation = param[:admin][:password_confirmation]
+    passwd_confirmation = params[:admin][:password_confirmation]
 
     if passwd.blank? && passwd_confirmation.blank?
       params[:admin].except!(:password, :password_confirmation)

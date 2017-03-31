@@ -50,6 +50,7 @@ group :development do
   gem 'better_errors'
   gem 'faker'
   # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'mailcatcher'
   gem 'web-console', '~> 2.0'
 
   gem 'rails-erd'
