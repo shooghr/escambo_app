@@ -1,17 +1,23 @@
 class Backoffice::AdminsController < BackofficeController
   before_action :set_admin, only: [:edit, :update, :destroy]
+  after_action :verify_authorized, only: :new
+  after_action :verify_policy_scoped, only: :index
+  
   def index
-    @admins = Admin.all
+    # @admins = Admin.all
+    @admins = policy_scope(Admin)
   end
 
   def new
     @admin = Admin.new
+    authorize @admin
   end
 
   def create
     @admin = Admin.new(params_admin)
     if @admin.save
-      redirect_to backoffice_admins_path, notice: "O administrador (#{admin.email})"
+      redirect_to backoffice_admins_path,
+                  notice: "O administrador (#{admin.email})"
     else
       render :new
     end
@@ -20,16 +26,9 @@ class Backoffice::AdminsController < BackofficeController
   def edit; end
 
   def update
-    passwd = params[:admin][:passwd]
-    passwd_confirmation = param[:admin][:password_confirmation]
-
-    if passwd.blank? && passwd_confirmation.blank?
-      params[:admin].delete(:password)
-      params[:admin].delete(:password_confirmation)
-    end
-
     if @admin.update(params_admin)
-      redirect_to backoffice_admins_path, notice: "O administrador (#{admin.email})"
+      redirect_to backoffice_admins_path,
+                  notice: "O administrador (#{admin.email})"
     else
       render :new
     end
@@ -38,7 +37,9 @@ class Backoffice::AdminsController < BackofficeController
   def destroy
     admin_email = admin.email
     if @admin.destroy
-      redirect_to backoffice_admins_path, notice: "O administrador (#{admin_email}) foi excluído com sucesso"
+      redirect_to backoffice_admins_path,
+                  notice: "O administrador (#{admin_email})
+                           foi excluído com sucesso"
     else
       render :index
     end
@@ -51,6 +52,13 @@ class Backoffice::AdminsController < BackofficeController
   end
 
   def params_admin
-    params.require(:admin).permit(:email, :name, :password, :password_confirmation)
+    passwd = params[:admin][:passwd]
+    passwd_confirmation = param[:admin][:password_confirmation]
+
+    if passwd.blank? && passwd_confirmation.blank?
+      params[:admin].except!(:password, :password_confirmation)
+    end
+
+    params.require(:admin).permit(policy(@admin).permitted_attributes)
   end
 end
