@@ -1,0 +1,11 @@
+'pt-BR':
+  messages:
+    confirm: Tem certeza?
+    confirm_with: Você deseja realmente excluir (<b>%{item}</b>)
+    listing: Listando %{model}
+    editing: Edintando %{model}
+    new: Novo %{model}
+    errors: Ocorreram...
+    created: Item creado com sucesso!
+    updated: Item atualizado com sucesso!
+    destroyed: Item excluído com sucesso!
