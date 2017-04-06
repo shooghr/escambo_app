@@ -40,6 +40,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+group :production do
+  gem 'mysql2', '~> 0.3.18'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -47,6 +50,11 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano', '~> 3.7'
+  gem 'capistrano-bundler', '~> 1.2'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-rvm'
+
   gem 'better_errors'
   gem 'faker'
   # Access an IRB console on exception pages or by using <%= console %> in views

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'backoffice', to: 'backoffice/dashbord#index'
 
   namespace :backoffice do
+    resources :send_mail, only: [:edit, :create]
     resources :categories, except: :show
     resources :admins, except: [:show]
     get 'dashbord', to: 'dashbord#index'
