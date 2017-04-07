@@ -42,6 +42,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 group :production do
   gem 'mysql2', '~> 0.3.18'
+  gem 'unicorn'
 end
 
 group :development, :test do
@@ -54,6 +55,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.2'
   gem 'capistrano-rails', '~> 1.2'
   gem 'capistrano-rvm'
+  gem 'capistrano3-unicorn'
 
   gem 'better_errors'
   gem 'faker'
