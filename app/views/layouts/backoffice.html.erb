@@ -37,14 +37,10 @@
             </div>
         </div>
         <% if notice %>
-            <script type="text/javascript">
-                $.notify("<%= notice %>", "success");
-            </script>
+            <%= javascript_tag "$.notify('#{notice}', 'success');" %>
         <% end %>
         <% if alert %>
-            <script type="text/javascript">
-                $.notify("<%= alert %>", "error");
-            </script>
+            <%= javascript_tag "$.notify('#{alert}', 'error');"  %>
         <% end %>
     </body>
 </html>
