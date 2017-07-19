@@ -1,13 +1,15 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
-gem 'rails-i18n'
-gem 'foreman'
 gem 'devise'
 gem 'devise-i18n'
 gem 'enum_help'
+gem 'foreman'
+gem 'money-rails'
+gem 'paperclip', '~> 5.0.0'
 gem 'pundit'
+gem 'rails', '4.2.6'
+gem 'rails-i18n'
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootbox'
   gem 'rails-assets-bootstrap', '3.3.7'
@@ -60,6 +62,7 @@ group :development do
   gem 'better_errors'
   gem 'faker'
   # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'lerolero_generator'
   gem 'mailcatcher'
   gem 'web-console', '~> 2.0'
 

@@ -11,18 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314151151) do
+ActiveRecord::Schema.define(version: 20170607192116) do
 
-# Could not dump table "admins" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "admins", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.integer  "role"
+  end
+
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
+  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
   create_table "ads", force: :cascade do |t|
     t.string   "title"
-    t.text     "description", limit: 255
+    t.text     "description",          limit: 255
     t.integer  "member_id"
     t.integer  "category_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "price_cents"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "ads", ["category_id"], name: "index_ads_on_category_id"

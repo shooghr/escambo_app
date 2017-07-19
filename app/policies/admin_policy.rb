@@ -13,9 +13,9 @@ class AdminPolicy < ApplicationPolicy
 
   def permitted_attributes
     if user.full_access?
-      [:email, :name, :role, :password, :password_confirmation]
+      %w[email name role password password_confirmation]
     else
-      [:email, :name, :password, :password_confirmation]
+      %w[email name password password_confirmation]
     end
   end
   

@@ -1,5 +1,5 @@
 class Backoffice::AdminsController < BackofficeController
-  before_action :set_admin, only: [:edit, :update, :destroy]
+  before_action :set_admin, only: %w[edit update destroy]
   after_action :verify_authorized, only: :new
   after_action :verify_policy_scoped, only: :index
   
@@ -54,7 +54,11 @@ class Backoffice::AdminsController < BackofficeController
 
   def params_admin
     params[:admin].except!(:password, :password_confirmation) if password_blank?
-    params.require(:admin).permit(policy(@admin).permitted_attributes)
+    if @admin.blank?
+      params.require(:admin).permit(:name, :email, :role, :password, :password_confirmation)
+    else
+      params.require(:admin).permit(policy(@admin).permitted_attributes)
+    end
   end
 
   def password_blank?
